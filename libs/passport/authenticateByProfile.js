@@ -2,10 +2,8 @@ const User = require('../../models/user');
 const config = require('config');
 const co = require('co');
 const request = require('request-promise');
-
-function UserAuthError(message) {
-  this.message = message;
-}
+const log = require('../log');
+const UserAuthError = require('./userAuthError');
 
 module.exports = async function(req, profile, done) {
   // profile = the data returned by the facebook graph api
@@ -63,13 +61,15 @@ module.exports = async function(req, profile, done) {
     // works?
     await user.validate();
   } catch (e) {
-    console.log(e);
+    log.info(e);
     // there's a required field
     // maybe, when the user was on the remote social login screen, he disallowed something?
     throw new UserAuthError("Недостаточно данных, разрешите их передачу, пожалуйста.");
   }
   try {
     await user.save();
+    log.debug(`User authenticated:${user.email},${user.displayName}`);
+    log.trace(user);
     done(null, user);
   } catch (err) {
     if (err instanceof UserAuthError) {

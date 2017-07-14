@@ -1,0 +1,51 @@
+{
+  "name": "koa-user",
+  "version": "1.0.0",
+  "description": "Javascript.ru course on NodeJS (koa-user application)",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/igorsubbotin/koa-user.git"
+  },
+  "author": "Igor Subbotin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/igorsubbotin/koa-user/issues"
+  },
+  "homepage": "https://github.com/igorsubbotin/koa-user#readme",
+  "devDependencies": {
+    "request": "^2.81.0",
+    "request-promise": "^4.2.1",
+    "selenium-webdriver": "^3.4.0",
+    "should": "^11.2.1"
+  },
+  "dependencies": {
+    "bunyan": "^1.8.10",
+    "bunyan-prettystream": "^0.1.3",
+    "co-busboy": "^1.3.1",
+    "config": "^1.26.1",
+    "koa": "^2.3.0",
+    "koa-bodyparser": "^4.2.0",
+    "koa-favicon": "^2.0.0",
+    "koa-generic-session": "^1.11.6",
+    "koa-logger": "^3.0.1",
+    "koa-passport": "^3.0.0",
+    "koa-router": "^7.2.1",
+    "koa-session-mongoose": "^1.0.0",
+    "koa-static": "^4.0.1",
+    "mongoose": "^4.11.1",
+    "mongoose-beautiful-unique-validation": "^6.0.0",
+    "passport-facebook": "^2.1.1",
+    "passport-github": "^1.1.0",
+    "passport-local": "^1.0.0",
+    "passport-twitter": "^1.0.4",
+    "passport-vkontakte": "^0.3.2",
+    "pug": "^2.0.0-rc.2"
+  }
+}

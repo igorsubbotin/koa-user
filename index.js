@@ -7,6 +7,8 @@ if (process.env.TRACE) {
   require('./libs/trace');
 }
 
+const log = require('./libs/log');
+
 const Koa = require('koa');
 const app = new Koa();
 
@@ -22,6 +24,7 @@ const middlewares = fs.readdirSync(path.join(__dirname, 'middlewares')).sort();
 
 middlewares.forEach(function(middleware) {
   app.use(require('./middlewares/' + middleware));
+  log.trace(`Middleware loaded: ${middleware}`);
 });
 
 // ---------------------------------------
@@ -44,6 +47,24 @@ router.get('/connect/facebook', passport.authorize('facebook', config.providers.
 
 // http://stage.javascript.ru/auth/callback/facebook?error=access_denied&error_code=200&error_description=Permissions+error&error_reason=user_denied#_=_
 router.get('/oauth/facebook', passport.authenticate('facebook', {
+  successRedirect: '/',
+  failureRedirect: '/',
+  failureFlash: true // req.flash
+}));
+
+// github
+router.get('/login/github', passport.authenticate('github', config.providers.github.passportOptions));
+router.get('/connect/github', passport.authorize('github', config.providers.github.passportOptions));
+router.get('/oauth/github', passport.authenticate('github', {
+  successRedirect: '/',
+  failureRedirect: '/',
+  failureFlash: true // req.flash
+}));
+
+// vkontakte
+router.get('/login/vkontakte', passport.authenticate('vkontakte', config.providers.vkontakte.passportOptions));
+router.get('/connect/vkontakte', passport.authorize('vkontakte', config.providers.vkontakte.passportOptions));
+router.get('/oauth/vkontakte', passport.authenticate('vkontakte', {
   successRedirect: '/',
   failureRedirect: '/',
   failureFlash: true // req.flash

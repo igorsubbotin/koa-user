@@ -1,3 +1,4 @@
+const log = require('../libs/log');
 
 module.exports = async function(ctx, next) {
 
@@ -8,6 +9,8 @@ module.exports = async function(ctx, next) {
   delete ctx.session.messages;
 
   ctx.flash = function(type, html) {
+
+    log.trace('Flashing');
 
     if (type === undefined) {
       return messages || {};

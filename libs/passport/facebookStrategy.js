@@ -3,10 +3,11 @@ const FacebookStrategy = require('passport-facebook').Strategy;
 const authenticateByProfile = require('./authenticateByProfile');
 const config = require('config');
 const request = require('request-promise');
+const UserAuthError = require('./userAuthError');
+const checkUserAuth = require('./checkUserAuth');
+const log = require('../log');
 
-function UserAuthError(message) {
-  this.message = message;
-}
+
 /*
   OAuth2,
 
@@ -29,13 +30,10 @@ module.exports = new FacebookStrategy({
   }, async function(req, accessToken, refreshToken, profile, done) {
 
     try {
-      console.log(profile);
+      log.debug('Facebook strategy');
+      log.trace(profile);
 
-      let permissionError = null;
-      // facebook won't allow to use an email w/o verification
-      if (!profile.emails || !profile.emails[0]) { // user may allow authentication, but disable email access (e.g in fb)
-        throw new UserAuthError("При входе разрешите доступ к email. Он используется для идентификации пользователя.");
-      }
+      checkUserAuth(profile);
 
       const response = await request.get({
         url: 'http://graph.facebook.com/v2.7/' + profile.id + '/picture?redirect=0&width=1000&height=1000',
@@ -53,7 +51,7 @@ module.exports = new FacebookStrategy({
 
       authenticateByProfile(req, profile, done);
     } catch (err) {
-      console.log(err);
+      log.error(err);
       if (err instanceof UserAuthError) {
         done(null, false, {message: err.message});
       } else {

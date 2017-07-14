@@ -10,8 +10,8 @@ module.exports = {
   },
   providers: {
     facebook: {
-      appId: '1584514044907807',
-      appSecret: 'f0f14ef63e0c6b9ec549b9b15f63a808',
+      appId: '1385548714854904',
+      appSecret: '999f33a311818b07ceff8625cdd41989',
       test: {
         login: 'course.test.facebook@gmail.com',
         password: 'course-test-facebook'
@@ -20,6 +20,14 @@ module.exports = {
         display: 'popup',
         scope:   ['email']
       }
+    },
+    github: {
+      clientId: 'Iv1.3fd3c298e17c530d',
+      clientSecret: '0199682525038700aa0ac730b8b8469475d23486'
+    },
+    vkontakte: {
+      clientId: '5PntKCWe1L90ve5cHFRW',
+      clientSecret: '200e31f6200e31f6200e31f66120537bb12200e200e31f67966d2b463bb48d1489b33a9'
     }
   },
   mongoose: {
@@ -32,6 +40,10 @@ module.exports = {
         poolSize:      5
       }
     }
+  },
+  bunyan: {
+    name: 'koa-user',
+    level: 'trace'
   },
   crypto: {
     hash: {

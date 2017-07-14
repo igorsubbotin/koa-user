@@ -17,6 +17,7 @@ module.exports = new LocalStrategy({
   // done(err) ->
   //   strategy.error(err)
   function(req, email, password, done) {
+    log.debug('Local strategy');
     User.findOne({ email }, function(err, user) {
       if (err) {
         return done(err);

@@ -5,6 +5,7 @@ const root = require('config').root;
 const mongoose = require('../libs/mongoose');
 const loadModels = require('../libs/loadModels');
 const clearDatabase = require('../libs/clearDatabase');
+const log = require('../log');
 
 module.exports = function() {
 
@@ -18,12 +19,12 @@ module.exports = function() {
 
     const dbPath = path.join(root, args.from);
 
-    console.log("loading db " + dbPath);
+    log.trace("loading db " + dbPath);
 
     await clearDatabase();
     await loadModels(require(dbPath));
 
-    console.log("loaded db " + dbPath);
+    log.trace("loaded db " + dbPath);
 
     mongoose.disconnect();
   });

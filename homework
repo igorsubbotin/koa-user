@@ -1,0 +1,12 @@
+- подключить социальную сеть
+    - vk (e2e tests)
+    - github (e2e tests)
+    - vkontakte (e2e tests)
+- добавить регистрацию с подтверждением емейл
+    - integration tests with stub for emailing
+    - e2e tests
+- логгер
+    - winston
+    - bunyan
+
+- read about websockets http://learn.javascript.ru/websockets
